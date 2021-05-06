@@ -10,7 +10,29 @@
 </head>
 
 <body>
-    <h1>Chat</h1>
+    <div class="page" id="loginPage">
+        <h1>Digite o seu nome</h1>
+        <input type="text" id="loginNameInput">
+    </div>
+
+    <div class="page" id="chatPage">
+        <div class="chatArea">
+            <ul class="chatList">
+                <li class="m-status">Fulano</li>
+            </ul>
+            <ul class="userList">
+                <li>Teste1</li>
+                <li>Teste2</li>
+                <li>Teste3</li>
+            </ul>
+        </div>
+    </div>
+    <div class="chatInput">
+        <input type="text" id="chatTextInput" placeholder="Digite uma mensagem">
+    </div>
 </body>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/assets/script/main.js"></script>
 
 </html>
