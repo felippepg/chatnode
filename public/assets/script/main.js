@@ -28,10 +28,12 @@ function addMessage(type, user, msg) {
             ul.innerHTML += '<li class="m-status">' + msg + '</li>';
             break;
 
-        case 'msf':
-            ul.innerHTML += '<li class="m-txt"><spam>' + user + '</spam>' + msg + '</li>';
+        case 'msg':
+            ul.innerHTML += '<li class="m-txt"><span>' + user + '</span> ' + msg + '</li>';
             break;
     }
+
+    ul.scrollTop = ul.scrollHeight;
 }
 
 loginNameInput.addEventListener('keyup', (e) => {
@@ -44,6 +46,18 @@ loginNameInput.addEventListener('keyup', (e) => {
         }
     }
 })
+
+chatTextInput.addEventListener('keyup', (e) => {
+    if (e.keyCode === 13) {
+        let txt = chatTextInput.value.trim();
+        chatTextInput.value = '';
+
+        if (txt != '') {
+            addMessage('msg', userName, txt);
+            socket.emit('send-msg', txt);
+        }
+    }
+});
 
 socket.on('user-ok', (list) => {
     loginPage.style.display = 'none';
@@ -67,3 +81,23 @@ socket.on('update-users', (data) => {
 
     renderUserList();
 })
+
+socket.on('show-msg', (data) => {
+    addMessage('msg', data.username, data.message);
+});
+
+socket.on('disconnect', () => {
+    addMessage('status', null, 'Você foi desconectado!');
+});
+
+socket.on('connect_error', () => {
+    addMessage('status', null, 'Tentando reconectar...');
+});
+
+socket.on('connect', () => {
+    addMessage('status', null, 'Reconectado');
+
+    if (userName) {
+        socket.emit('join-user', userName);
+    }
+});

@@ -1,5 +1,11 @@
-.body {
+body {
     margin: 0;
+}
+
+ul, li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 .page {
@@ -10,7 +16,7 @@
 }
 
 #loginPage {
-    display: flex;
+    display: none;
     background-color: #FFF;
 }
 
@@ -26,9 +32,8 @@
 }
 
 #chatPage {
-    display: none;
+    display: flex;
 }
-
 
 .chatArea {
     flex: 1;
@@ -37,9 +42,25 @@
     background-color: #CCC;
 }
 
+.chatInput  {
+    width: 100%;
+    display: flex;
+}
+
+#chatTextInput {
+    flex: 1;
+    height: 40px;
+    padding: 0 10px;
+    font-size: 15px;
+    background-color: #CCC;
+    outline: 0;
+    border: 0;
+}
 .chatList {
     flex: 1;
     background-color: #FFF;
+    overflow-y: scroll;
+    max-height: calc(100vh - 40px);
 }
 
 .chatList li {
@@ -71,4 +92,3 @@
     padding: 5px;
     font-size: 15px;
 }
-
